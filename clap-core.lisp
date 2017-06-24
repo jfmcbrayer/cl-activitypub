@@ -62,3 +62,20 @@
 
 (defclass ordered-collection-page (ordered-collection collection-page)
   ())
+
+(defclass activity (object)
+  ((actor :accessor actor :initarg :actor)
+   (object :accessor object :initarg :object)
+   (target :accessor target :initarg :target)
+   (result :accessor result :initarg :result)
+   (origin :accessor origin :initarg :origin)
+   (instrument :accessor instrument :initarg :instrument)))
+
+;; Intransitive activity should be a subtype of activity, but
+;; we couldn't remove the object property
+(defclass intransitive-activity (object)
+    ((actor :accessor actor :initarg :actor)
+     (target :accessor target :initarg :target)
+     (result :accessor result :initarg :result)
+     (origin :accessor origin :initarg :origin)
+     (instrument :accessor instrument :initarg :instrument)))
