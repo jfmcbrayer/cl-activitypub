@@ -46,3 +46,19 @@
    (object-type :reader object-type :initform "Link"
                 :allocation :class)))
 
+(defclass collection (object)
+  ((total-items :accessor total-items :initarg :total-items)
+   (current :accessor current :initarg :current)
+   (first-item :accessor first-item :initarg :first-item)
+   (last-item :accessor last-item :initarg :last-item)
+   (items :accessor items :initarg :items)))
+
+(defclass ordered-collection (collection) ())
+
+(defclass collection-page (collection)
+  ((part-of :accessor part-of :initarg :part-of)
+   (next-page :accessor next-page :initarg :next-page)
+   (prev-page :accessor prev-page :initarg :prev-page)))
+
+(defclass ordered-collection-page (ordered-collection collection-page)
+  ())
