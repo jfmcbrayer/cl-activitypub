@@ -1,7 +1,9 @@
-(defpackage "clap.core"
-  (:use "CL" "JSON")
-  (:export object link))
-(in-package "clap.core")
+(defpackage :CLAP.CORE
+  (:use :CL :CL-JSON)
+  (:export object link collection ordered-collection
+           collection-page ordered-collection-page
+           activity intransitive-activity))
+(in-package :CLAP.CORE)
 
 (defclass object ()
   ((attachment :accessor attachment :initarg :attachment)
