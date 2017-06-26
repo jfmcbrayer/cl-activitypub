@@ -2,16 +2,17 @@
   (:use :CL :CL-JSON)
   (:export object link collection ordered-collection
            collection-page ordered-collection-page
-           activity intransitive-activity))
+           activity intransitive-activity
+           actor as-json))
 (in-package :CLAP.CORE)
 
 (defclass object ()
   ((attachment :accessor attachment :initarg :attachment)
    (attributedTo :accessor attributedTo :initarg :attributedTo)
    (audience :accessor audience :initarg :audience)
-   (content :accessor content :initarg :content
-            :initform "https://www.w3e.org/ns/activitystreams")
-   (context :accessor context :initarg :context)
+   (atcontext :accessor atcontext :initarg :atcontext
+              :initform "https://www.w3e.org/ns/activitystreams")
+   (content :accessor context :initarg :context)
    (name :accessor name :initarg :name)
    (end-time :accessor end-time :initarg :end-time)
    (generator :accessor generator :initarg :generator)
@@ -81,3 +82,7 @@
      (result :accessor result :initarg :result)
      (origin :accessor origin :initarg :origin)
      (instrument :accessor instrument :initarg :instrument)))
+
+
+(defmethod as-json ((object object) &optional stream)
+  (cl-json:encode-json object stream))
