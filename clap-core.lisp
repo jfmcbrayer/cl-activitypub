@@ -88,7 +88,9 @@
    (last-item :accessor last-item :initarg :last-item
               :json-key "lastItem")
    (items :accessor items :initarg :items
-          :json-key "items"))
+          :json-key "items")
+   (object-type :reader object-type :initform "Collection"
+                :json-key "type"))
   (:metaclass json-serializable-class))
 
 (defclass ordered-collection (collection) ()
@@ -100,11 +102,14 @@
    (next-page :accessor next-page :initarg :next-page
               :json-key "nextPage")
    (prev-page :accessor prev-page :initarg :prev-page
-              :json-key "prevPage"))
+              :json-key "prevPage")
+   (object-type :reader object-type :initform "CollectionPage"
+                :json-key "type"))
   (:metaclass json-serializable-class))
 
 (defclass ordered-collection-page (ordered-collection collection-page)
-  ()
+  ((object-type :reader object-type :initform "OrderedCollectionPage"
+                :json-key "type"))
   (:metaclass json-serializable-class))
 
 (defclass activity (object)
@@ -114,7 +119,9 @@
    (result :accessor result :initarg :result :json-key "result")
    (origin :accessor origin :initarg :origin :json-key "origin")
    (instrument :accessor instrument :initarg :instrument
-               :json-key "instrument"))
+               :json-key "instrument")
+   (object-type :reader object-type :initform "Activity"
+                :json-key "type"))
   (:metaclass json-serializable-class))
 
 ;; Intransitive activity should be a subtype of activity, but
@@ -125,7 +132,9 @@
      (result :accessor result :initarg :result :json-key "result")
      (origin :accessor origin :initarg :origin :json-key "origin")
      (instrument :accessor instrument :initarg :instrument
-                 :json-key "instrument"))
+                 :json-key "instrument")
+     (object-type :accessor object-type :initform "IntransitiveActivity"
+                  :json-key "type"))
   (:metaclass json-serializable-class))
 
 

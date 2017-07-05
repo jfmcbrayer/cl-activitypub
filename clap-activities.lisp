@@ -1,5 +1,5 @@
 (defpackage :CLAP.ACTIVITIES
-  (:use :CL :CL-JSON :CLAP.CORE)
+  (:use :CL :JSON-MOP :CLAP.CORE)
   (:export accept tentative-accept
            invite reject tentative-reject
            travel arrive
