@@ -8,8 +8,12 @@
   :depends-on ("json-mop")
   :components ((:file "package")
                (:file "cl-activitypub")
-               (:file "clap-core")
-               (:file "clap-activities")
-               (:file "clap-actors")
-               (:file "clap-objects")))
+               (:module "entities"
+                        :serial t
+                        :components 
+                        ((:file "package")
+                        (:file "core")
+                        (:file "activities")
+                        (:file "actors")
+                        (:file "objects")))))
 
