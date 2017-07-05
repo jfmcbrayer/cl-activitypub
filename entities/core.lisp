@@ -1,12 +1,6 @@
-(defpackage :CLAP.CORE
-  (:use :CL :JSON-MOP :YASON)
-  (:export object link collection ordered-collection
-           collection-page ordered-collection-page
-           activity intransitive-activity
-           actor as-json))
-(in-package :CLAP.CORE)
+(in-package :clap-entities)
 
-(defclass object ()
+(defclass ap-object ()
   ((attachment :accessor attachment :initarg :attachment
                :json-key "attachment")
    (attributed-to :accessor attributed-to :initarg :attributed-to
@@ -78,7 +72,7 @@
                 :json-key "type"))
   (:metaclass json-serializable-class))
 
-(defclass collection (object)
+(defclass collection (ap-object)
   ((total-items :accessor total-items :initarg :total-items
                 :json-key "totalItems")
    (current :accessor current :initarg :current
@@ -112,7 +106,7 @@
                 :json-key "type"))
   (:metaclass json-serializable-class))
 
-(defclass activity (object)
+(defclass activity (ap-object)
   ((actor :accessor actor :initarg :actor :json-key "actor")
    (object :accessor object :initarg :object :json-key "object")
    (target :accessor target :initarg :target :json-key "target")
@@ -126,7 +120,7 @@
 
 ;; Intransitive activity should be a subtype of activity, but
 ;; we couldn't remove the object property
-(defclass intransitive-activity (object)
+(defclass intransitive-activity (ap-object)
     ((actor :accessor actor :initarg :actor :json-key "actor")
      (target :accessor target :initarg :target :json-key "target")
      (result :accessor result :initarg :result :json-key "result")
@@ -138,7 +132,7 @@
   (:metaclass json-serializable-class))
 
 
-(defmethod as-json ((object object))
+(defmethod as-json ((object ap-object))
   (encode object))
 
 (defmethod as-json ((link link))

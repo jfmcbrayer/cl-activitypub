@@ -1,13 +1,6 @@
-(defpackage :clap.actors
-  (:use :cl :json-mop :clap.core)
-  (:export application
-           person
-           group
-           organization))
+(in-package :clap-entities)
 
-(in-package :clap.actors)
-
-(defclass application (clap.core:object) ())
-(defclass person (clap.core:object) ())
-(defclass group (clap.core:object) ())
-(defclass organization (clap.core:object) ())
+(defclass application (ap-object) ())
+(defclass person (ap-object) ())
+(defclass group (ap-object) ())
+(defclass organization (ap-object) ())

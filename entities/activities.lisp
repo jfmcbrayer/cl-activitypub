@@ -1,54 +1,39 @@
-(defpackage :CLAP.ACTIVITIES
-  (:use :CL :JSON-MOP :CLAP.CORE)
-  (:export accept tentative-accept
-           invite reject tentative-reject
-           travel arrive
-           create delete-activity
-           undo update
-           add remove-activity move
-           follow ignore-activity
-           like announce
-           block-activity flag
-           dislike
-           join leave
-           view listen-activity read-activity
-           question))
-(in-package :CLAP.ACTIVITIES)
+(in-package :clap-entities)
 
-(defclass accept (clap.core:activity) ())
+(defclass accept (activity) ())
 (defclass tentative-accept (accept) ())
-(defclass invite (clap.core:activity) ())
-(defclass reject (clap.core:activity) ())
+(defclass invite (activity) ())
+(defclass reject (activity) ())
 (defclass tentative-reject (reject) ())
 
-(defclass travel (clap.core:intransitive-activity) ())
-(defclass arrive (clap.core:intransitive-activity) ())
+(defclass travel (intransitive-activity) ())
+(defclass arrive (intransitive-activity) ())
 
-(defclass create (clap.core:activity) ())
-(defclass delete-activity (clap.core:activity) ())
-(defclass undo (clap.core:activity) ())
-(defclass update (clap.core:activity) ())
+(defclass create (activity) ())
+(defclass delete-activity (activity) ())
+(defclass undo (activity) ())
+(defclass update (activity) ())
 
-(defclass add (clap.core:activity) ())
-(defclass remove-activity (clap.core:activity) ())
-(defclass move (clap.core:activity) ())
+(defclass add (activity) ())
+(defclass remove-activity (activity) ())
+(defclass move (activity) ())
 
-(defclass follow (clap.core:activity) ())
-(defclass ignore-activity (clap.core:activity) ())
-(defclass like (clap.core:activity) ())
-(defclass announce (clap.core:activity) ())
+(defclass follow (activity) ())
+(defclass ignore-activity (activity) ())
+(defclass like (activity) ())
+(defclass announce (activity) ())
 (defclass block-activity (ignore) ())
-(defclass flag (clap.core:activity) ())
-(defclass dislike (clap.core:activity) ())
+(defclass flag (activity) ())
+(defclass dislike (activity) ())
 
-(defclass join (clap.core:activity) ())
-(defclass leave (clap.core:activity) ())
+(defclass join (activity) ())
+(defclass leave (activity) ())
 
-(defclass view (clap.core:activity) ())
-(defclass listen-activity (clap.core:activity) ())
-(defclass read-activity (clap.core:activity) ())
+(defclass view (activity) ())
+(defclass listen-activity (activity) ())
+(defclass read-activity (activity) ())
 
-(defclass question (clap.core:intransitive-activity)
+(defclass question (intransitive-activity)
   ((one-of :accessor one-of :initarg :one-of)
    (any-of :accessor any-of :initarg :any-of)
    (closed :accessor closed :initarg :closed)))
