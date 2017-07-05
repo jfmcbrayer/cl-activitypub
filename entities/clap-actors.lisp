@@ -1,5 +1,5 @@
 (defpackage :clap.actors
-  (:use :cl :cl-json :clap.core)
+  (:use :cl :json-mop :clap.core)
   (:export application
            person
            group
