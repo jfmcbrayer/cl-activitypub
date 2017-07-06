@@ -83,9 +83,18 @@
      (instrument :accessor instrument :initarg :instrument)
      (object-type :accessor object-type :initform "IntransitiveActivity")))
 
+(defmethod yason:encode-slots progn ((object ap-object))
+  (yason:encode-object-element "@context" (atcontext object))
+  (yason:encode-object-element "type" (object-type object)))
 
-(defmethod as-json ((object ap-object))
-  (encode object))
 
-(defmethod as-json ((link link))
-  (encode link))
+(defgeneric as-json (object &optional stream)
+  (:documentation "Represent the object as a JSON object."))
+
+(defmethod as-json ((object ap-object) &optional (stream *standard-output*))
+  (yason:with-output (stream :indent t)
+    (yason:encode-object object)))
+
+(defmethod as-json ((link link) &optional (stream *standard-output*))
+  (yason:with-output (stream :indent t)
+    (yason:encode-object link)))
