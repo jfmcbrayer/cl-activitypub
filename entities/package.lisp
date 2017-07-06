@@ -1,7 +1,7 @@
 ;;;; package.lisp
 
 (defpackage #:clap-entities
-  (:use #:CL #:JSON-MOP)
+  (:use #:cl #:yason)
   (:export ap-object link collection ordered-collection
            collection-page ordered-collection-page
            activity intransitive-activity

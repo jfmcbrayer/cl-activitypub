@@ -5,7 +5,7 @@
   :author "Jason McBrayer <jmcbray@carcosa.net>"
   :license "AGPLv3"
   :serial t
-  :depends-on ("json-mop")
+  :depends-on ("yason")
   :components ((:file "package")
                (:file "cl-activitypub")
                (:module "entities"
