@@ -87,7 +87,12 @@
   `(if (slot-boundp ,object ,slot) (progn ,@body)))
 
 (defun clap-encode-element (object slot key)
-  (if-slot-bound object slot (yason:encode-object-element key (slot-value object slot))))
+  (if-slot-bound object slot
+  (typecase (slot-value object slot)
+    (standard-object
+     (with-object-element (key) (with-object () (encode-slots (slot-value object slot)))))
+    (t
+     (yason:encode-object-element key (slot-value object slot))))))
 
 (defmethod yason:encode-slots progn ((object ap-object))
   (yason:encode-object-element "@context" (atcontext object))
@@ -119,9 +124,14 @@
   (clap-encode-element object 'media-type "mediaType")
   (clap-encode-element object 'duration "duration"))
 
+(defmethod yason:encode-slots progn ((activity activity))
+  (clap-encode-element activity 'object "object"))
+
+(defmethod yason:encode-slots progn ((bah nil))
+  nil)
 
 (defgeneric as-json (object &optional stream)
-  (:documentation "Represent the object as a JSON object."))
+  (:documentation "Represent the object as JSON, output to stream."))
 
 (defmethod as-json ((object ap-object) &optional (stream *standard-output*))
   (yason:with-output (stream :indent t)
@@ -130,3 +140,4 @@
 (defmethod as-json ((link link) &optional (stream *standard-output*))
   (yason:with-output (stream :indent t)
     (yason:encode-object link)))
+
