@@ -2,7 +2,7 @@
 
 (defpackage #:clap-entities
   (:use #:cl #:yason)
-  (:export ap-object link collection ordered-collection
+  (:export ap-object link actor collection ordered-collection
            collection-page ordered-collection-page
            activity intransitive-activity
            actor as-json)
