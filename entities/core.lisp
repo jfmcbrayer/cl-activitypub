@@ -137,9 +137,6 @@
 (defmethod yason:encode-slots progn ((activity activity))
   (clap-encode-element activity 'object "object"))
 
-(defmethod yason:encode-slots progn ((bah nil))
-  nil)
-
 (defgeneric as-json (object &optional stream)
   (:documentation "Represent the object as JSON, output to stream."))
 
