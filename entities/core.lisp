@@ -1,7 +1,7 @@
 (in-package :clap-entities)
 
 (defclass ap-object ()
-  ((id :accessor id :initarg id :initform nil)
+  ((id :accessor id :initarg :id :initform nil)
    (attachment :accessor attachment :initarg :attachment)
    (attributed-to :accessor attributed-to :initarg :attributed-to)
    (audience :accessor audience :initarg :audience)
@@ -46,6 +46,14 @@
    (atcontext :accessor atcontext :initarg :atcontext
               :initform "https://www.w3e.org/ns/activitystreams")
    (object-type :reader object-type :initform "Link")))
+
+(defclass actor (ap-object)
+  ((inbox :accessor inbox :initarg :inbox)
+   (outbox :accessor outbox :initarg :outbox)
+   (following :accessor following :initarg :following)
+   (followers :accessor followers :initarg :followers)
+   (liked :accessor liked :initarg :liked)
+   (object-type :reader object-type :initform "Actor")))
 
 (defclass collection (ap-object)
   ((total-items :accessor total-items :initarg :total-items)
