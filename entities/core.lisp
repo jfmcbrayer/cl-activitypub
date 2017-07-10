@@ -1,7 +1,8 @@
 (in-package :clap-entities)
 
 (defclass ap-object ()
-  ((attachment :accessor attachment :initarg :attachment)
+  ((id :accessor id :initarg id :initform nil)
+   (attachment :accessor attachment :initarg :attachment)
    (attributed-to :accessor attributed-to :initarg :attributed-to)
    (audience :accessor audience :initarg :audience)
    (atcontext :accessor atcontext :initarg :atcontext
