@@ -19,6 +19,7 @@
    (preview :accessor preview :initarg :preview)
    (published :accessor published :initarg :published)
    (replies :accessor replies :initarg :replies)
+   (source :accessor source :initarg :source)
    (start-time :accessor start-time :initarg :start-time)
    (summary :accessor summary :initarg :summary)
    (tag :accessor tag :initarg :tag)
