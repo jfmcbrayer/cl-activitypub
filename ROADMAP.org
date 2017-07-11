@@ -1,0 +1,53 @@
+* Roadmap
+
+** Model layer
+
+- [X] Implement all ActivityStreams2 classes as CLOS classes
+- [X] Teach the model classes to serialize themselves as JSON ActivityStreams2 objects
+- [ ] Deserialize model classes from JSON
+- [ ] Persist and load model classes from database
+- [ ] Implement service layer as repositories
+
+** Homeserver
+
+Goal: a basic client-server API server. Provides API endpoints and a brutalist web UI. Meets compliance checklist.
+
+App design will probably track AP functionality more than what I eventually want.
+
+Maybe goals
+- Multiple Actors per account (sub-identities)
+- Some kind of minimal task queue implementation, though many tasks will probably be synchronous.
+
+** Federating server
+
+Goal: a UI-free federating server. Responds to s2s requests, and also does delivery of objects created by homeserver.
+
+Subgoals:
+- only locally deliver foreign requests if they are signed.
+- blacklist or whitelist hosts
+- Better task queue implementation
+
+** Command-line/repl client.
+
+Goals
+- Support mail(1)-like interface to AP.
+- Support media attachments
+- Support most/all actions with very low level of abstraction.
+
+** Advanced homeserver
+
+Start implementing the homeserver design I actually want, rather that what's implied by the protocol.
+
+Subgoals:
+- Pretty, interactive web interface
+  + Built according to ROCA style
+  + UI enhanced with intercooler.js
+  + Use lightweight mobile-first CSS framework.
+- Use S3 api for media uploads
+- Focus on anti-abuse, accessibility features.
+- Loosely coupled with federating server and its task queue
+- Focus on scaling down, not on scaling up; but don't make it too hard to scale up a little.
+
+
+
+
