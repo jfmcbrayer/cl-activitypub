@@ -2,4 +2,4 @@
 
 This is eventually going to be an [[https://activitypub.rocks/][ActivityPub]] implementation in Common Lisp, but it is very early days yet.
 
-There is a [[Roadmap.org][Roadmap]].
+There is a [[ROADMAP.org][Roadmap]].
