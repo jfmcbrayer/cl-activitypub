@@ -134,6 +134,9 @@
 (defmethod yason:encode-slots progn ((activity activity))
   (clap-encode-element activity 'object "object"))
 
+;; TODO: add yason:encode-slots definitions for every other subclass
+;;       that has added slots.
+
 (defgeneric as-json (object &optional stream)
   (:documentation "Represent the object as JSON, output to stream."))
 
@@ -168,4 +171,5 @@
              ("Object" (make-instance 'ap-object))
              ("Link" (make-instance 'link))
              (otherwise (make-instance 'ap-object)))))
+    ;; TODO: handle every subclass, actually copy values over.
     base-object))
