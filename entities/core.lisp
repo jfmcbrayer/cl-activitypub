@@ -93,16 +93,13 @@
      (instrument :accessor instrument :initarg :instrument)
      (object-type :accessor object-type :initform "IntransitiveActivity")))
 
-(defmacro if-slot-bound (object slot &rest body)
-  `(if (slot-boundp ,object ,slot) (progn ,@body)))
-
 (defun clap-encode-element (object slot key)
-  (if-slot-bound object slot
-  (typecase (slot-value object slot)
-    (standard-object
-     (with-object-element (key) (with-object () (encode-slots (slot-value object slot)))))
-    (t
-     (yason:encode-object-element key (slot-value object slot))))))
+  (if (slot-boundp object slot)
+      (typecase (slot-value object slot)
+        (standard-object
+         (with-object-element (key) (with-object () (encode-slots (slot-value object slot)))))
+        (t
+         (yason:encode-object-element key (slot-value object slot))))))
 
 (defmethod yason:encode-slots progn ((object ap-object))
   (yason:encode-object-element "@context" (atcontext object))
@@ -140,11 +137,35 @@
 (defgeneric as-json (object &optional stream)
   (:documentation "Represent the object as JSON, output to stream."))
 
+(defgeneric as-json-string (object)
+  (:documentation "Represent the object as JSON, output to string"))
+
 (defmethod as-json ((object ap-object) &optional (stream *standard-output*))
-  (yason:with-output (stream :indent t)
+    (yason:with-output (stream :indent t)
+      (yason:encode-object object)))
+
+(defmethod as-json-string ((object ap-object))
+  (yason:with-output-to-string* (:indent t)
     (yason:encode-object object)))
 
 (defmethod as-json ((link link) &optional (stream *standard-output*))
   (yason:with-output (stream :indent t)
     (yason:encode-object link)))
 
+(defmethod as-json-string ((link link))
+  (yason:with-output-to-string* (:indent t)
+    (yason:encode-object object)))
+
+(defmacro hash-to-slot (key hashtable object slot)
+  `(if (gethash ,key ,hashtable)
+       (setf (slot-value ,object ,slot) (gethash ,key ,hashtable))))
+
+(defun from-json (json-string)
+  (let* ((result-map (yason:parse json-string))
+         (object-type (alexandria:ensure-gethash "type" result-map "Object"))
+         (base-object
+           (case object-type
+             ("Object" (make-instance 'ap-object))
+             ("Link" (make-instance 'link))
+             (otherwise (make-instance 'ap-object)))))
+    base-object))
