@@ -6,6 +6,14 @@
 - [X] Teach the model classes to serialize themselves as JSON ActivityStreams2 objects
 - [ ] Deserialize model classes from JSON
 - [ ] Persist and load model classes from database
+  Not 100% sure about ORM to use. All of them I've found are Django-style
+  (infiltrate your model classes) rather than Hibernate-style (external map to
+  your model classes).
+
+  Leaning somewhat toward [[https://eudoxia.me/crane/][Crane]], though it hasn't been updated in a while. [[https://github.com/fukamachi/mito][Mito]]
+  is much more up to date, but specifically marked as alpha quality. But maybe
+  also
+
 - [ ] Implement service layer as repositories
 
 ** Homeserver
