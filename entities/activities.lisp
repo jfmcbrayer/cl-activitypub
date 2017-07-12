@@ -40,7 +40,7 @@
   ((object-type :reader object-type :initform "Like")))
 (defclass announce (activity)
   ((object-type :reader object-type :initform "Announce")))
-(defclass block-activity (ignore)
+(defclass block-activity (ignore-activity)
   ((object-type :reader object-type :initform "Block")))
 (defclass flag (activity)
   ((object-type :reader object-type :initform "Flag")))
