@@ -42,7 +42,6 @@
    (height :accessor height :initarg :height)
    (width :accessor width :initarg :width)
    (preview :accessor preview :initarg :preview)
-   (context :accessor context :initarg :context)
    (atcontext :accessor atcontext :initarg :atcontext
               :initform "https://www.w3e.org/ns/activitystreams")
    (object-type :reader object-type :initform "Link")))
@@ -130,6 +129,24 @@
   (clap-encode-element object 'bcc "bcc")
   (clap-encode-element object 'media-type "mediaType")
   (clap-encode-element object 'duration "duration"))
+
+(defmethod yason:encode-slots progn ((link link))
+  (yason:encode-object-element "@context" (atcontext link))
+  (yason:encode-object-element "type" (object-type link))
+  (clap-encode-element link 'href "href")
+  (clap-encode-element link 'rel "rel")
+  (clap-encode-element link 'media-type "mediaType")
+  (clap-encode-element link 'hreflang "hreflang")
+  (clap-encode-element link 'height "height")
+  (clap-encode-element link 'width "width")
+  (clap-encode-element link 'preview "preview"))
+
+(defmethod yason:encode-slots progn ((actor actor))
+  (clap-encode-element actor 'inbox "inbox")
+  (clap-encode-element actor 'outbox "outbox")
+  (clap-encode-element actor 'following "following")
+  (clap-encode-element actor 'followers "followers")
+  (clap-encode-element actor 'liked "liked"))
 
 (defmethod yason:encode-slots progn ((activity activity))
   (clap-encode-element activity 'object "object"))
