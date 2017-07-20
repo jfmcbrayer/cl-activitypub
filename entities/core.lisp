@@ -62,8 +62,8 @@
    (items :accessor items :initarg :items)
    (object-type :reader object-type :initform "Collection")))
 
-(defclass ordered-collection (collection) ()
-  (object-type :reader object-type :initform "OrderedCollection"))
+(defclass ordered-collection (collection)
+  ((object-type :reader object-type :initform "OrderedCollection")))
 
 (defclass collection-page (collection)
   ((part-of :accessor part-of :initarg :part-of)
