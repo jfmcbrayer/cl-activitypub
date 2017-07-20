@@ -163,7 +163,18 @@
 
 
 (defmethod yason:encode-slots progn ((activity activity))
-  (clap-encode-element activity 'object "object"))
+  (clap-encode-element activity 'object "object")
+  (clap-encode-element activity 'actor "actor")
+  (clap-encode-element activity 'result "result")
+  (clap-encode-element activity 'origin "origin")
+  (clap-encode-element activity 'instrunent "instrument"))
+(defmethod yason:encode-slots progn ((activity intransitive-activity))
+  (clap-encode-element activity 'object "object")
+  (clap-encode-element activity 'actor "actor")
+  (clap-encode-element activity 'result "result")
+  (clap-encode-element activity 'origin "origin")
+  (clap-encode-element activity 'instrunent "instrument"))
+
 
 ;; TODO: add yason:encode-slots definitions for every other subclass
 ;;       that has added slots.
