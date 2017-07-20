@@ -65,3 +65,7 @@
    (closed :accessor closed :initarg :closed)
    (object-type :reader object-type :initform "Question")))
 
+(defmethod yason:encode-slots progn ((question question))
+  (clap-encode-element question 'one-of "oneOf" )
+  (clap-encode-element question 'any-of "anyOf")
+  (clap-encode-element question 'closed "closed"))

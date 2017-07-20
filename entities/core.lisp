@@ -97,7 +97,8 @@
   (if (slot-boundp object slot)
       (typecase (slot-value object slot)
         (standard-object
-         (with-object-element (key) (with-object () (encode-slots (slot-value object slot)))))
+         (with-object-element (key)
+           (with-object () (encode-slots (slot-value object slot)))))
         (t
          (yason:encode-object-element key (slot-value object slot))))))
 
