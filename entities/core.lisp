@@ -62,7 +62,8 @@
    (items :accessor items :initarg :items)
    (object-type :reader object-type :initform "Collection")))
 
-(defclass ordered-collection (collection) ())
+(defclass ordered-collection (collection) ()
+  (object-type :reader object-type :initform "OrderedCollection"))
 
 (defclass collection-page (collection)
   ((part-of :accessor part-of :initarg :part-of)
@@ -147,6 +148,19 @@
   (clap-encode-element actor 'following "following")
   (clap-encode-element actor 'followers "followers")
   (clap-encode-element actor 'liked "liked"))
+
+(defmethod yason:encode-slots progn ((coll collection))
+  (clap-encode-element coll 'total-items "totalItems")
+  (clap-encode-element coll 'current "current")
+  (clap-encode-element coll 'first-item "firstItem")
+  (clap-encode-element coll 'last-item "lastItem")
+  (clap-encode-element coll 'items "items"))
+
+(defmethod yason:encode-slots progn ((page collection-page))
+  (clap-encode-element page 'part-of "partOf")
+  (clap-encode-element page 'next-page "nextPage")
+  (clap-encode-element page 'prev-page "prevPage"))
+
 
 (defmethod yason:encode-slots progn ((activity activity))
   (clap-encode-element activity 'object "object"))
