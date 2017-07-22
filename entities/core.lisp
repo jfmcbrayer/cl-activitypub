@@ -177,9 +177,6 @@
   (clap-encode-element activity 'instrunent "instrument"))
 
 
-;; TODO: add yason:encode-slots definitions for every other subclass
-;;       that has added slots.
-
 (defgeneric as-json (object &optional stream)
   (:documentation "Represent the object as JSON, output to stream."))
 
@@ -209,10 +206,58 @@
 (defun from-json (json-string)
   (let* ((result-map (yason:parse json-string))
          (object-type (alexandria:ensure-gethash "type" result-map "Object"))
-         (base-object
-           (case object-type
-             ("Object" (make-instance 'ap-object))
-             ("Link" (make-instance 'link))
-             (otherwise (make-instance 'ap-object)))))
-    ;; TODO: handle every subclass, actually copy values over.
+         (base-object (object-type-string-to-object object-type)))
     base-object))
+
+(defun object-type-string-to-object (type-string)
+  (cond 
+    ((string-equal type-string "Object") (make-instance 'ap-object))
+    ((string-equal type-string "Link") (make-instance 'link))
+    ((string-equal type-string "Actor") (make-instance 'actor))
+    ((string-equal type-string "Collection")
+     (make-instance 'collection))
+    ((string-equal type-string "OrderedCollection")
+     (make-instance 'ordered-collection))
+    ((string-equal type-string "CollectionPage")
+     (make-instance 'collection-page))
+    ((string-equal type-string "OrderedCollectionPage")
+     (make-instance 'ordered-collection-page))
+    ((string-equal type-string "Activity") (make-instance 'activity))
+    ((string-equal type-string "IntransitiveActivity")
+     (make-instance 'intransitive-activity))
+    ((string-equal type-string "Accept") (make-instance 'accept))
+    ((string-equal type-string "TentativeAccept") (make-instance
+                                                   'tentative-accept))
+    ((string-equal type-string "Invite") (make-instance 'invite))
+    ((string-equal type-string "Reject") (make-instance 'reject))
+    ((string-equal type-string "TentativeReject") (make-instance
+                                                   'tentative-reject))
+    ((string-equal type-string "Travel") (make-instance 'travel))
+    ((string-equal type-string "Arrive") (make-instance 'arrive))
+    ((string-equal type-string "Create") (make-instance 'create))
+    ((string-equal type-string "Delete") (make-instance 'delete-activity))
+    ((string-equal type-string "Undo") (make-instance 'undo))
+    ((string-equal type-string "Update") (make-instance 'update))
+    ((string-equal type-string "Add") (make-instance 'add))
+    ((string-equal type-string "Remove") (make-instance 'remove-activity))
+    ((string-equal type-string "Move") (make-instance 'move))
+    ((string-equal type-string "Follow") (make-instance 'follow))
+    ((string-equal type-string "Ignore") (make-instance 'ignore-activity))
+    ((string-equal type-string "Like") (make-instance 'like))
+    ((string-equal type-string "Announce") (make-instance 'announce))
+    ((string-equal type-string "Block") (make-instance 'block-activity))
+    ((string-equal type-string "Flag") (make-instance 'flag))
+    ((string-equal type-string "Dislike") (make-instance 'dislike))
+    ((string-equal type-string "Join") (make-instance 'join))
+    ((string-equal type-string "Leave") (make-instance 'leave))
+    ((string-equal type-string "View") (make-instance 'view))
+    ((string-equal type-string "Listen") (make-instance 'listen-activity))
+    ((string-equal type-string "Read") (make-instance 'read-activity))
+    ((string-equal type-string "Question") (make-instance 'question))
+    ((string-equal type-string "Application") (make-instance 'application))
+    ((string-equal type-string "Person") (make-instance 'person))
+    ((string-equal type-string "Group") (make-instance 'group))
+    ((string-equal type-string "Organization") (make-instance 'organization))
+    (t nil)))
+
+
