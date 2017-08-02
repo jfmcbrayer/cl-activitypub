@@ -5,6 +5,9 @@
                                    :image "https://example.com/images/foo"
                                    :content "This is a note."
                                    :to '("https://example.com/PUBLIC")))
+
+(plan 1)
+
 (is (clap-entities:as-json-string *my-object*)
     "{
   \"@context\":\"https://www.w3e.org/ns/activitystreams\",
@@ -13,3 +16,5 @@
   \"image\":\"https://example.com/images/foo\",
   \"to\":[\"https://example.com/PUBLIC\"]
 }")
+
+(finalize)

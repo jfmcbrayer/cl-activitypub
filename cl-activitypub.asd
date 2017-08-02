@@ -9,15 +9,21 @@
   :components ((:file "package")
                (:file "cl-activitypub")
                (:module "entities"
-                        :serial t
-                        :components
-                        ((:file "package")
-                        (:file "core")
-                        (:file "activities")
-                        (:file "actors")
-                         (:file "objects")))
-               (:module "tests"
                 :serial t
                 :components
                 ((:file "package")
-                 (:file "test-to-json")))))
+                 (:file "core")
+                 (:file "activities")
+                 (:file "actors")
+                 (:file "objects"))))
+  :in-order-to ((test-op (test-op cl-activitypub-test))))
+
+(asdf:defsystem :cl-activitypub-test
+  :depends-on (:cl-activitypub
+               :prove)
+  :defsystem-depends-on (:prove-asdf)
+  :components
+  ((:test-file "tests/package")
+   (:test-file "tests/test-to-json"))
+  :perform (test-op :after (op c)
+                    (funcall (intern #.(string :run) :prove) c)))

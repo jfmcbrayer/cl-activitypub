@@ -197,7 +197,7 @@
 
 (defmethod as-json-string ((link link))
   (yason:with-output-to-string* (:indent t)
-    (yason:encode-object object)))
+    (yason:encode-object link)))
 
 (defmacro hash-to-slot (key hashtable object slot)
   `(if (gethash ,key ,hashtable)
