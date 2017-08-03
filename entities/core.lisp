@@ -168,13 +168,13 @@
   (clap-encode-element activity 'actor "actor")
   (clap-encode-element activity 'result "result")
   (clap-encode-element activity 'origin "origin")
-  (clap-encode-element activity 'instrunent "instrument"))
+  (clap-encode-element activity 'instrument "instrument"))
 (defmethod yason:encode-slots progn ((activity intransitive-activity))
   (clap-encode-element activity 'object "object")
   (clap-encode-element activity 'actor "actor")
   (clap-encode-element activity 'result "result")
   (clap-encode-element activity 'origin "origin")
-  (clap-encode-element activity 'instrunent "instrument"))
+  (clap-encode-element activity 'instrument "instrument"))
 
 
 (defgeneric as-json (object &optional stream)
