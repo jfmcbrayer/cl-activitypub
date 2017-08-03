@@ -5,7 +5,7 @@
   :author "Jason McBrayer <jmcbray@carcosa.net>"
   :license "AGPLv3"
   :serial t
-  :depends-on ("yason" "prove")
+  :depends-on ("yason")
   :components ((:file "package")
                (:file "cl-activitypub")
                (:module "entities"
@@ -22,8 +22,12 @@
   :depends-on (:cl-activitypub
                :prove)
   :defsystem-depends-on (:prove-asdf)
+  :serial t
   :components
-  ((:test-file "tests/package")
-   (:test-file "tests/test-to-json"))
+  ((:module "tests"
+    :serial t
+    :components
+    ((:test-file "package")
+     (:test-file "test-to-json"))))
   :perform (test-op :after (op c)
                     (funcall (intern #.(string :run) :prove) c)))
