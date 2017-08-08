@@ -5,7 +5,7 @@
   (:export ap-object link actor collection ordered-collection
            collection-page ordered-collection-page
            activity intransitive-activity
-           actor as-json as-json-string)
+           actor as-json as-json-string from-json)
     (:export accept tentative-accept
            invite reject tentative-reject
            travel arrive

@@ -27,7 +27,8 @@
   ((:module "tests"
     :serial t
     :components
-    ((:test-file "package")
-     (:test-file "test-to-json"))))
+    ((:file "package")
+     (:test-file "to-json")
+     (:test-file "from-json"))))
   :perform (test-op :after (op c)
                     (funcall (intern #.(string :run) :prove) c)))
