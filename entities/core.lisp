@@ -1,4 +1,4 @@
-(in-package :clap-entities)
+(in-package "clap-entities")
 
 (defclass ap-object ()
   ((id :accessor id :initarg :id :initform nil)
