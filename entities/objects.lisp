@@ -1,4 +1,4 @@
-(in-package "clap-entities")
+(in-package #:clap-entities)
 
 (defclass relationship (ap-object)
   ((relationship-subject :accessor relationship-subject

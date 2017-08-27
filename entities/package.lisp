@@ -1,6 +1,6 @@
 ;;;; package.lisp
 
-(defpackage "clap-entities"
+(defpackage #:clap-entities
   (:use #:cl #:yason #:alexandria)
   (:export ap-object link actor collection ordered-collection
            collection-page ordered-collection-page

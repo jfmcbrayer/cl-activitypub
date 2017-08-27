@@ -1,4 +1,4 @@
-(in-package "clap-entities")
+(in-package #:clap-entities)
 
 (defclass accept (activity)
   ((object-type :reader object-type :initform "Accept")))

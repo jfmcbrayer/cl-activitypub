@@ -1,6 +1,6 @@
 ;;;; cl-activitypub.asd
 
-(asdf:defsystem #:cl-activitypub
+(asdf:defsystem "cl-activitypub"
   :description "An ActivityPub implementation"
   :author "Jason McBrayer <jmcbray@carcosa.net>"
   :license "AGPLv3"
@@ -18,8 +18,8 @@
                  (:file "objects"))))
   :in-order-to ((test-op (test-op cl-activitypub-test))))
 
-(asdf:defsystem :cl-activitypub-test
-  :depends-on (:cl-activitypub
+(asdf:defsystem "cl-activitypub-test"
+  :depends-on ("cl-activitypub"
                :prove)
   :defsystem-depends-on (:prove-asdf)
   :serial t

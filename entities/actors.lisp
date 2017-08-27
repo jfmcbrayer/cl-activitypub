@@ -1,4 +1,4 @@
-(in-package "clap-entities")
+(in-package #:clap-entities)
 
 (defclass application (actor)
   ((object-type :reader object-type :initform "Application")))
