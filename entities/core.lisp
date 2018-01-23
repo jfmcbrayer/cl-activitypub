@@ -35,17 +35,18 @@
    ))
 
 (defclass link ()
-  ((href :accessor href :initarg :href)
-   (rel :initarg :rel :accessor rel)
-   (media-type :accessor media-type :initarg :media-type)
-   (name :accessor name :initarg :name)
-   (hreflang :accessor hreflang :initarg :hreflang :initform "en")
-   (height :accessor height :initarg :height)
-   (width :accessor width :initarg :width)
-   (preview :accessor preview :initarg :preview)
+  ((href :accessor href :initarg :href) ;; URI
+   (rel :initarg :rel :accessor rel) ;; String  (HTML5 link relation)
+   (media-type :accessor media-type :initarg :media-type) ;; String (MIME type)
+   (name :accessor name :initarg :name) ;; String
+   (hreflang :accessor hreflang :initarg :hreflang :initform "en") ;; String (Language tag)
+   (height :accessor height :initarg :height) ;; non-negative-integer
+   (width :accessor width :initarg :width) ;; non-negative-integer
+   (preview :accessor preview :initarg :preview) ;; Link or Object
    (atcontext :accessor atcontext :initarg :atcontext
               :initform "https://www.w3e.org/ns/activitystreams")
-   (object-type :reader object-type :initform "Link")))
+   (object-type :reader object-type :initform "Link") ;; URI
+   ))
 
 (defclass actor (ap-object)
   ((inbox :accessor inbox :initarg :inbox)
