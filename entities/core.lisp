@@ -70,9 +70,9 @@
   ((object-type :reader object-type :initform "OrderedCollection")))
 
 (defclass collection-page (collection)
-  ((part-of :accessor part-of :initarg :part-of)
-   (next-page :accessor next-page :initarg :next-page)
-   (prev-page :accessor prev-page :initarg :prev-page)
+  ((part-of :accessor part-of :initarg :part-of) ;; Collection or Link
+   (next-page :accessor next-page :initarg :next-page) ;; CollectionPage
+   (prev-page :accessor prev-page :initarg :prev-page) ;; CollectionPage
    (object-type :reader object-type :initform "CollectionPage")))
 
 (defclass ordered-collection-page (ordered-collection collection-page)
