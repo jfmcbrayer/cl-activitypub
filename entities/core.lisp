@@ -1,15 +1,20 @@
 (in-package #:clap-entities)
 
-(defclass ap-object ()
+(defclass ap-base ()
+  ((atcontext :accessor atcontext :initarg :atcontext
+              :initform "https://w3c.org/ns/activitystreams")
+   (name :accessor name :initarg :name) ;; String
+   (media-type :accessor media-type :initarg :media-type) ;; String (Mime media-type)
+   (object-type :reader object-type) ;; URI 
+   ))
+
+(defclass ap-object (ap-base)
   ((id :accessor id :initarg :id :initform nil) ;; URI
    (attachment :accessor attachment :initarg :attachment) ;; Object or Link
    (attributed-to :accessor attributed-to :initarg :attributed-to) ;; Object or Link
    (audience :accessor audience :initarg :audience) ;; Object or Link
-   (atcontext :accessor atcontext :initarg :atcontext
-              :initform "https://www.w3e.org/ns/activitystreams")
    (content :accessor content :initarg :content) ;; String (HTML)
    (context :accessor context :initarg :context) ;; Object or Link
-   (name :accessor name :initarg :name) ;; String
    (end-time :accessor end-time :initarg :end-time) ;; DateTime
    (generator :accessor generator :initarg :generator) ;; Object or Link
    (icon :accessor icon :initarg :icon) ;; Image or Link
@@ -29,22 +34,17 @@
    (bto :accessor bto :initarg :bto) ;; Object or Link
    (cc :accessor cc :initarg :cc) ;; Object or Link
    (bcc :accessor bcc :initarg :bcc) ;; Object or Link
-   (media-type :accessor media-type :initarg :media-type) ;; String (MIME type)
    (duration :accessor duration :initarg :duration) ;; xsd:Duration
    (object-type :reader object-type :initform "Object") ;; URI
    ))
 
-(defclass link ()
+(defclass link (ap-base)
   ((href :accessor href :initarg :href) ;; URI
    (rel :initarg :rel :accessor rel) ;; String  (HTML5 link relation)
-   (media-type :accessor media-type :initarg :media-type) ;; String (MIME type)
-   (name :accessor name :initarg :name) ;; String
    (hreflang :accessor hreflang :initarg :hreflang :initform "en") ;; String (Language tag)
    (height :accessor height :initarg :height) ;; non-negative-integer
    (width :accessor width :initarg :width) ;; non-negative-integer
    (preview :accessor preview :initarg :preview) ;; Link or Object
-   (atcontext :accessor atcontext :initarg :atcontext
-              :initform "https://www.w3e.org/ns/activitystreams")
    (object-type :reader object-type :initform "Link") ;; URI
    ))
 
