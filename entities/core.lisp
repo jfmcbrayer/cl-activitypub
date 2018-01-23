@@ -48,7 +48,7 @@
    (object-type :reader object-type :initform "Link") ;; URI
    ))
 
-;; Actor is defined in ActivityPub, not ActivityStreams2. 
+;; Actor is defined in ActivityPub, not ActivityStreams2.
 (defclass actor (ap-object)
   ((inbox :accessor inbox :initarg :inbox) ;; OrderedCollection
    (outbox :accessor outbox :initarg :outbox) ;; OrderedCollection
@@ -58,11 +58,12 @@
    (object-type :reader object-type :initform "Actor")))
 
 (defclass collection (ap-object)
-  ((total-items :accessor total-items :initarg :total-items)
-   (current :accessor current :initarg :current)
-   (first-item :accessor first-item :initarg :first-item)
-   (last-item :accessor last-item :initarg :last-item)
-   (items :accessor items :initarg :items)
+  ((total-items :accessor total-items :initarg :total-items) ;; non-negative-integer
+   (current :accessor current :initarg :current) ;; CollectionPage or Link
+   (first-item :accessor first-item :initarg :first-item) ;; CollectionPage or Link
+   (last-item :accessor last-item :initarg :last-item) ;; CollectionPage or Link
+   (items :accessor items :initarg :items) ;; Object, Link, or ordered list of
+                                           ;; objects or links
    (object-type :reader object-type :initform "Collection")))
 
 (defclass ordered-collection (collection)
@@ -213,7 +214,7 @@
     base-object))
 
 (defun object-type-string-to-object (type-string)
-  (cond 
+  (cond
     ((string-equal type-string "Object") (make-instance 'ap-object))
     ((string-equal type-string "Link") (make-instance 'link))
     ((string-equal type-string "Actor") (make-instance 'actor))
@@ -262,5 +263,3 @@
     ((string-equal type-string "Group") (make-instance 'group))
     ((string-equal type-string "Organization") (make-instance 'organization))
     (t nil)))
-
-
