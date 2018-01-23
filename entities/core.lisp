@@ -1,37 +1,38 @@
 (in-package #:clap-entities)
 
 (defclass ap-object ()
-  ((id :accessor id :initarg :id :initform nil)
-   (attachment :accessor attachment :initarg :attachment)
-   (attributed-to :accessor attributed-to :initarg :attributed-to)
-   (audience :accessor audience :initarg :audience)
+  ((id :accessor id :initarg :id :initform nil) ;; URI
+   (attachment :accessor attachment :initarg :attachment) ;; Object or Link
+   (attributed-to :accessor attributed-to :initarg :attributed-to) ;; Object or Link
+   (audience :accessor audience :initarg :audience) ;; Object or Link
    (atcontext :accessor atcontext :initarg :atcontext
               :initform "https://www.w3e.org/ns/activitystreams")
-   (content :accessor content :initarg :content)
-   (context :accessor context :initarg :context)
-   (name :accessor name :initarg :name)
-   (end-time :accessor end-time :initarg :end-time)
-   (generator :accessor generator :initarg :generator)
-   (icon :accessor icon :initarg :icon)
-   (image :accessor image :initarg :image)
-   (in-reply-to :accessor in-reply-to :initarg :in-reply-to)
-   (location :accessor location :initarg :location)
-   (preview :accessor preview :initarg :preview)
-   (published :accessor published :initarg :published)
+   (content :accessor content :initarg :content) ;; String (HTML)
+   (context :accessor context :initarg :context) ;; Object or Link
+   (name :accessor name :initarg :name) ;; String
+   (end-time :accessor end-time :initarg :end-time) ;; DateTime
+   (generator :accessor generator :initarg :generator) ;; Object or Link
+   (icon :accessor icon :initarg :icon) ;; Image or Link
+   (image :accessor image :initarg :image) ;; Image or Link
+   (in-reply-to :accessor in-reply-to :initarg :in-reply-to) ;; Object or Link
+   (location :accessor location :initarg :location) ;; Object or Link
+   (preview :accessor preview :initarg :preview) ;; Object or Link
+   (published :accessor published :initarg :published) ;; DateTime
    (replies :accessor replies :initarg :replies)
-   (source :accessor source :initarg :source)
-   (start-time :accessor start-time :initarg :start-time)
-   (summary :accessor summary :initarg :summary)
-   (tag :accessor tag :initarg :tag)
-   (updated :accessor updated :initarg :updated)
-   (url :accessor url :initarg :url)
-   (to :accessor to :initarg :to)
-   (bto :accessor bto :initarg :bto)
-   (cc :accessor cc :initarg :cc)
-   (bcc :accessor bcc :initarg :bcc)
-   (media-type :accessor media-type :initarg :media-type)
-   (duration :accessor duration :initarg :duration)
-   (object-type :reader object-type :initform "Object")))
+   (source :accessor source :initarg :source) ;; String (markdown or other)
+   (start-time :accessor start-time :initarg :start-time) ;; DateTime
+   (summary :accessor summary :initarg :summary) ;; String (HTML)
+   (tag :accessor tag :initarg :tag) ;; Object or Link
+   (updated :accessor updated :initarg :updated) ;; DateTime
+   (url :accessor url :initarg :url) ;; URI or Link
+   (to :accessor to :initarg :to) ;; Object or Link
+   (bto :accessor bto :initarg :bto) ;; Object or Link
+   (cc :accessor cc :initarg :cc) ;; Object or Link
+   (bcc :accessor bcc :initarg :bcc) ;; Object or Link
+   (media-type :accessor media-type :initarg :media-type) ;; String (MIME type)
+   (duration :accessor duration :initarg :duration) ;; xsd:Duration
+   (object-type :reader object-type :initform "Object") ;; URI
+   ))
 
 (defclass link ()
   ((href :accessor href :initarg :href)
