@@ -48,12 +48,13 @@
    (object-type :reader object-type :initform "Link") ;; URI
    ))
 
+;; Actor is defined in ActivityPub, not ActivityStreams2. 
 (defclass actor (ap-object)
-  ((inbox :accessor inbox :initarg :inbox)
-   (outbox :accessor outbox :initarg :outbox)
-   (following :accessor following :initarg :following)
-   (followers :accessor followers :initarg :followers)
-   (liked :accessor liked :initarg :liked)
+  ((inbox :accessor inbox :initarg :inbox) ;; OrderedCollection
+   (outbox :accessor outbox :initarg :outbox) ;; OrderedCollection
+   (following :accessor following :initarg :following) ;; Collection
+   (followers :accessor followers :initarg :followers) ;; Collection
+   (liked :accessor liked :initarg :liked) ;; Collection
    (object-type :reader object-type :initform "Actor")))
 
 (defclass collection (ap-object)
