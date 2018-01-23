@@ -79,12 +79,12 @@
   ((object-type :reader object-type :initform "OrderedCollectionPage")))
 
 (defclass activity (ap-object)
-  ((actor :accessor actor :initarg :actor)
-   (object :accessor object :initarg :object)
-   (target :accessor target :initarg :target)
-   (result :accessor result :initarg :result)
-   (origin :accessor origin :initarg :origi)
-   (instrument :accessor instrument :initarg :instrument)
+  ((actor :accessor actor :initarg :actor) ;; Object or Link
+   (object :accessor object :initarg :object) ;; Object or Link
+   (target :accessor target :initarg :target) ;; Object or Link
+   (result :accessor result :initarg :result) ;; Object or Link
+   (origin :accessor origin :initarg :origi) ;; Object or Link
+   (instrument :accessor instrument :initarg :instrument) ;; Object or Link
    (object-type :reader object-type :initform "Activity")))
 
 ;; Intransitive activity should be a subtype of activity, but
