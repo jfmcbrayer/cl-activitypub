@@ -23,7 +23,7 @@
    (location :accessor location :initarg :location) ;; Object or Link
    (preview :accessor preview :initarg :preview) ;; Object or Link
    (published :accessor published :initarg :published) ;; DateTime
-   (replies :accessor replies :initarg :replies)
+   (replies :accessor replies :initarg :replies) ;; Collection
    (source :accessor source :initarg :source) ;; String (markdown or other)
    (start-time :accessor start-time :initarg :start-time) ;; DateTime
    (summary :accessor summary :initarg :summary) ;; String (HTML)
